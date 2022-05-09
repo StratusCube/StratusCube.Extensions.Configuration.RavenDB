@@ -30,8 +30,9 @@ jobs:
         path: ./bin/Release/*.nupkg
         # The desired behavior if no files are found using the provided path.
   publish:
-    needs: [build]
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [build]    
     steps:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
