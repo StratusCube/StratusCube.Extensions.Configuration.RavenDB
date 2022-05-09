@@ -26,7 +26,7 @@ jobs:
     - name: publish
       run: dotnet nuget push ./bin/Release/*.nupkg \
         -s --source https://api.nuget.org/v3/index.json \
-        --skip-duplicate --no-symbols
+        --skip-duplicate --no-symbols \
         -k ${NUGET_KEY}
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
