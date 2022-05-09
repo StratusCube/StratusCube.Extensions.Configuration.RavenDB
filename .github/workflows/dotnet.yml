@@ -23,8 +23,26 @@ jobs:
       run: dotnet build --no-restore -c Release
     - name: Pack
       run: dotnet pack -c Release
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ./bin/Release/*.nupkg
+        # The desired behavior if no files are found using the provided path.
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.x.x
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+        # Artifact name
+        path: ./artifacts
     - name: publish
-      run: dotnet nuget push ./bin/Release/*.nupkg
+      run: dotnet nuget push ./artifacts/*.nupkg
         --source https://api.nuget.org/v3/index.json
         --skip-duplicate --no-symbols
         -k ${NUGET_KEY}
