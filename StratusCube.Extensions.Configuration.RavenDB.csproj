@@ -25,15 +25,12 @@
   <ItemGroup>
     <Content Include="nuget-icon.png">
       <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
     </Content>
 	<Content Include="README.md">
 		<Pack>True</Pack>
-		<PackagePath>\</PackagePath>
 	</Content>
     <Content Include="LICENSE">
 	  <Pack>True</Pack>
-	  <PackagePath>\</PackagePath>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
