@@ -30,6 +30,7 @@ jobs:
         path: ./bin/Release/*.nupkg
         # The desired behavior if no files are found using the provided path.
   publish:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - name: Setup .NET
