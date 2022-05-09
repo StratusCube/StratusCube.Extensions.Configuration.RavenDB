@@ -25,7 +25,7 @@ jobs:
       run: dotnet pack -c Release
     - name: publish
       run: dotnet nuget push ./bin/Release/*.nupkg
-        -s --source https://api.nuget.org/v3/index.json
+        --source https://api.nuget.org/v3/index.json
         --skip-duplicate --no-symbols
         -k ${NUGET_KEY}
       env:
