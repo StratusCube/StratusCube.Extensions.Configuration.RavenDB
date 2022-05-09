@@ -28,5 +28,8 @@ jobs:
         -s --source https://api.nuget.org/v3/index.json \
         --skip-duplicate --no-symbols
         -k ${NUGET_API_KEY}
+      env:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+      
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
