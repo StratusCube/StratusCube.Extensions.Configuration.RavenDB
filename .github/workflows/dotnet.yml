@@ -43,7 +43,7 @@ jobs:
         # Artifact name
         path: ./artifacts
     - name: publish
-      run: dotnet nuget push ./artifacts/*.nupkg
+      run: dotnet nuget push ./artifacts/**/*.nupkg
         --source https://api.nuget.org/v3/index.json
         --skip-duplicate --no-symbols
         -k ${NUGET_KEY}
