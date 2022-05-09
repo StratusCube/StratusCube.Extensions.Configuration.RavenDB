@@ -1,5 +1,7 @@
 # StratusCube.Extensions.Configuration.RavenDB
 
+[![.NET](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/dotnet.yml/badge.svg)](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/dotnet.yml)
+
 Use RavenDB as a configuration provider in dotnet.
 
 The package will let you use RavenDB as a configuration provider. Either a collection or an entire database may be used as a provider. The provider can also make use of Collection or Database subscriptions to reload the configuration changes.
@@ -12,7 +14,7 @@ Add the package to your project from [nuget](https://www.nuget.org/packages/Stra
 dotnet add package StratusCube.Extensions.Configuration.RavenDB
 ```
 
-The `RavenDBConfigurationExtensions` class resides in the namespace `Microsoft.Extensions.Configuration` so, in most new web projects the namespace will not need to be specified in the `Program.cs` file.
+The `RavenDBConfigurationExtensions` class resides in the namespace `Microsoft.Extensions.Configuration`. In most new web projects the namespace will not need to be specified in the `Program.cs` file.
 
 ## Usage
 
