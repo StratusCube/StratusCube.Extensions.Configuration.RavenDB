@@ -1,6 +1,7 @@
 # StratusCube.Extensions.Configuration.RavenDB
 
-[![.NET](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/dotnet.yml/badge.svg)](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/dotnet.yml)
+[![.NET](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/dotnet.yml/badge.svg)](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/dotnet.yml) 
+[![CodeQL](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/StratusCube/StratusCube.Extensions.Configuration.RavenDB/actions/workflows/codeql-analysis.yml)
 
 Use RavenDB as a configuration provider in dotnet.
 
