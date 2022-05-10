@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DebugType>portable</DebugType>
-    <Version>6.0.1</Version>
+    <Version>6.1.0</Version>
     <Authors>Mark Pro, StratusCube Contributors</Authors>
     <Company>StratusCube</Company>
     <Description>Adds RavenDb as a configuration source with the ability to auto reload on collection or database change and either use a whole database or a collection within a database as a configuration.</Description>
