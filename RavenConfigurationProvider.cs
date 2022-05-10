@@ -66,7 +66,7 @@ internal class RavenConfigurationProvider : ConfigurationProvider {
                     return o.Descendants()
                         .OfType<JValue>()
                         .ToDictionary(
-                            jv => @$"{(_collection == "@all_docs" && !_useCollectionPrefix
+                            jv => @$"{(_collection == "@all_docs" || !_useCollectionPrefix
                                 ? "" : $"{_collection}:")}{jv.Path.Replace('.' , ':')}" , 
                             jv => $"{jv}");
                 });

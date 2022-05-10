@@ -21,6 +21,15 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore -c Release
+    - name: Test
+      run: dotnet test --logger trx --results-directory "TestResults-StratusCube.Extensions.Configuration.RavenDB"
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: dotnet-results-StratusCube.Extensions.Configuration.RavenDB
+        path: TestResults-StratusCube.Extensions.Configuration.RavenDB
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
     - name: Pack
       run: dotnet pack -c Release
     - name: Upload a Build Artifact
@@ -32,18 +41,19 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    needs: [build]    
+    needs: [build]
     steps:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.x.x
-    - name: Download a Build Artifact
+    - name: Download nupkg
       uses: actions/download-artifact@v3.0.0
       with:
         # Artifact name
         path: ./artifacts
     - name: publish
+      working-directory: ./artifacts
       run: dotnet nuget push ./artifacts/**/*.nupkg
         --source https://api.nuget.org/v3/index.json
         --skip-duplicate --no-symbols
