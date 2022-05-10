@@ -26,8 +26,8 @@ jobs:
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v3
       with:
-        name: dotnet-results-${{ matrix.dotnet-version }}
-        path: TestResults-${{ matrix.dotnet-version }}
+        name: dotnet-results-StratusCube.Extensions.Configuration.RavenDB
+        path: TestResults-StratusCube.Extensions.Configuration.RavenDB
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
     - name: Pack
