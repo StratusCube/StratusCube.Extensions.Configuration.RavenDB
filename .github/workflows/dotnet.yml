@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore -c Release
     - name: Test
-      run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      run: dotnet test --logger trx --results-directory "TestResults-StratusCube.Extensions.Configuration.RavenDB"
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v3
       with:
