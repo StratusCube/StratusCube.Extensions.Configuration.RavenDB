@@ -4,7 +4,7 @@ using StratusCube.Extensions.Configuration;
 
 namespace Microsoft.Extensions.Configuration;
 
-public static class RavenDBConfigurationExtensions {
+public static class ConfigurationBuilderExtensions {
 
     /// <summary>
     /// Adds an entire database a a configuration. 
