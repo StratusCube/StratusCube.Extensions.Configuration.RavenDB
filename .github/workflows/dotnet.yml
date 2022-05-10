@@ -23,13 +23,6 @@ jobs:
       run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.0.0
-      with:
-        name: build
-        # A file, directory or wildcard pattern that describes what to upload
-        path: ./**
-        # The desired behavior if no files are found using the provided path.
     - name: Pack
       run: dotnet pack -c Release
     - name: Upload a Build Artifact
