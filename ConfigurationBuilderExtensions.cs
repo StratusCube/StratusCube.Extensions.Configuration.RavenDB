@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Raven.Client.Documents;
 using StratusCube.Extensions.Configuration;
 
-namespace StratusCube.Extensions.Configuration.RavenDB;
+namespace Microsoft.Extensions.Configuration;
 
 public static class ConfigurationBuilderExtensions {
 
@@ -44,7 +44,7 @@ public static class ConfigurationBuilderExtensions {
     /// <param name="documentStore">The document store to use for RavenDb</param>
     /// <param name="collectionName">The collection to use as configuratins</param>
     /// <param name="reloadOnChange">
-    ///     Should reload when any document in the databse changes 
+    ///     Specifies if the provider should reload when any document in the databse changes 
     /// </param>
     /// <param name="loggerConfig">
     ///     Optional action to build out a logger config for the provider to use
@@ -80,10 +80,15 @@ public static class ConfigurationBuilderExtensions {
     /// The id of the documnet to use as a configuration
     /// <code>MyCollection/A1</code>
     /// </param>
-    /// <param name="reloadOnChange"></param>
+    /// <param name="reloadOnChange">
+    ///  Specifies if the provider should reload when the document changes
+    /// </param>
     /// <param name="loggerConfig"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <returns>
+    /// Optional action to build out a logger config for the provider to use
+    /// </returns>
+    /// <exception cref="NotImplementedException">
+    /// </exception>
     public static IConfigurationBuilder AddRavenDocumnet(
         this IConfigurationBuilder builder ,
         IDocumentStore documentStore ,
