@@ -77,7 +77,7 @@ public static class ConfigurationBuilderExtensions {
     /// <param name="builder"></param>
     /// <param name="documentStore">The document store to use for RavenDb</param>
     /// <param name="documentId">
-    /// The id of the documnet to use as a configuration
+    /// The id of the document to use as a configuration
     /// <code>MyCollection/A1</code>
     /// </param>
     /// <param name="reloadOnChange">
@@ -89,7 +89,7 @@ public static class ConfigurationBuilderExtensions {
     /// </returns>
     /// <exception cref="NotImplementedException">
     /// </exception>
-    public static IConfigurationBuilder AddRavenDocumnet(
+    public static IConfigurationBuilder AddRavenDocument(
         this IConfigurationBuilder builder ,
         IDocumentStore documentStore ,
         string documentId ,

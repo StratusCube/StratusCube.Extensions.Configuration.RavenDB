@@ -12,7 +12,7 @@ public class AddRavenDocumentTest : RavenConfigurationTests {
         : base (
             "StratusCube.Extensions.Configuration.RavenDocConfigurationProvider" ,
             () => configuration => {
-                configuration.AddRavenDocumnet(
+                configuration.AddRavenDocument(
                     documentStore: Initializer.DocumentStore ,
                     documentId: Initializer.DEFAULT_DOC_ID ,
                     reloadOnChange: true ,
@@ -21,7 +21,7 @@ public class AddRavenDocumentTest : RavenConfigurationTests {
                 );
             } ,
             () => configuration => {
-                configuration.AddRavenDocumnet(
+                configuration.AddRavenDocument(
                     documentStore: Initializer.DocumentStore ,
                     documentId: Initializer.DEFAULT_DOC_ID ,
                     reloadOnChange: false ,
