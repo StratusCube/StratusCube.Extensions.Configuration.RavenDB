@@ -21,17 +21,41 @@ The `RavenDBConfigurationExtensions` class resides in the namespace `Microsoft.E
 
 The following is an example implementation. In the `Program.cs` you can add the following:
 
+### Program.cs Boilerplate
+
 ```csharp
+//. Document store to use for the config
 using Microsoft.Extensions.Configuration;
 
-//. Document store to use for the config
 IDocumentStore configStore = new DocumentStore {
     Database = "MyDatabase" ,
     Urls = new[] { "http://localhost:8080" } ,
 };
 
 var builder = WebApplication.CreateBuilder(args);
+```
 
+### Add Single Raven Document
+
+```csharp
+builder.Configuration.AddRavenDocument(
+    documentStore: configStore ,
+    //. the document ID to use for the configurations
+    documentId: "MyDocumentID" ,
+    //. if true a subscriber will be used to notify when the collection has changed
+    //. and if so load the new configuration values
+    reloadOnChange: true ,
+    //. optionally add a logger, in this case the logger will grab the
+    //. configuration section of logging and add a console provider
+    config => config
+        .AddConfiguration(builder.Configuration.GetSection("Logging"))
+        .AddConsole()
+);
+```
+
+### Add Raven Collection Source
+
+```csharp
 builder.Configuration.AddRavenDbCollection(
     documentStore: configStore ,
     //. the collection to use for the configurations
@@ -46,6 +70,24 @@ builder.Configuration.AddRavenDbCollection(
     //. optionally add a logger, in this case the logger will grab the
     //. configuration section of logging and add a console provider
     loggerConfig: config => config
+        .AddConfiguration(builder.Configuration.GetSection("Logging"))
+        .AddConsole()
+);
+```
+
+### Add Raven Database
+
+```csharp
+builder.Configuration.AddRavenDb(
+    //. The database specified in the IDocumentStore will be used
+    //. for the configurations
+    documentStore: configStore ,
+    //. if true a subscriber will be used to notify when the collection has changed
+    //. and if so load the new configuration values
+    reloadOnChange: true ,
+    //. optionally add a logger, in this case the logger will grab the
+    //. configuration section of logging and add a console provider
+    config => config
         .AddConfiguration(builder.Configuration.GetSection("Logging"))
         .AddConsole()
 );
