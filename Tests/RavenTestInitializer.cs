@@ -10,9 +10,14 @@ namespace Tests;
 [TestClass]
 public class RavenTestInitializer {
 
-    public static IDocumentStore DocumentStore { get; set; }
+    public static IDocumentStore DocumentStore { get; set; } =
+        new DocumentStore();
 
     public const string DEFAULT_COLLECTION = "@empty";
+    public static readonly string DEFAULT_DOC_ID =
+        Guid.NewGuid().ToString();
+    public static readonly string KEY_REGEX =
+        $"^({nameof(HttpClientConfigs.GitHubApi)}|{nameof(HttpClientConfigs.TimeApi)}):";
 
     [AssemblyInitialize]
     public static void Initialize(TestContext context) {
@@ -50,7 +55,7 @@ public class RavenTestInitializer {
             }
         };
 
-        session.Store(httpConfigs);
+        session.Store(httpConfigs, DEFAULT_DOC_ID);
         session.SaveChanges();
 
         //EmbeddedServer.Instance.OpenStudioInBrowser();

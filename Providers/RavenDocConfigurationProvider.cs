@@ -4,16 +4,16 @@ using Raven.Client.Documents.Changes;
 
 namespace StratusCube.Extensions.Configuration;
 
-internal class RavenDocProvider : RavenConfigurationProvider {
+internal class RavenDocConfigurationProvider : RavenConfigurationProvider {
 
     readonly string _documentId;
 
-    public RavenDocProvider(
+    public RavenDocConfigurationProvider(
         IDocumentStore documentStore ,
         string documentId ,
         bool reloadOnChange = false ,
         IObservable<DocumentChange>? observable = null ,
-        ILogger<RavenDocProvider>? logger = null
+        ILogger<RavenDocConfigurationProvider>? logger = null
     ) : base(documentStore , reloadOnChange , observable , logger) {
         ArgumentNullException.ThrowIfNull(documentId , nameof(documentId));
         _documentId = documentId;

@@ -76,7 +76,7 @@ public static class ConfigurationBuilderExtensions {
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="documentStore">The document store to use for RavenDb</param>
-    /// <param name="documentID">
+    /// <param name="documentId">
     /// The id of the documnet to use as a configuration
     /// <code>MyCollection/A1</code>
     /// </param>
@@ -92,19 +92,18 @@ public static class ConfigurationBuilderExtensions {
     public static IConfigurationBuilder AddRavenDocumnet(
         this IConfigurationBuilder builder ,
         IDocumentStore documentStore ,
-        string documentID ,
+        string documentId ,
         bool reloadOnChange = default ,
         Action<ILoggingBuilder>? loggerConfig = default
     ) {
-        var logger = LoggerFactory.Create(loggerConfig);
-        throw new NotImplementedException();
-        var configuration = new RavenCollectionConfigurationSource(
+        var config = new RavenDocConfigurationSource(
             documentStore ,
-            string.Empty ,
+            documentId ,
             reloadOnChange ,
-            false ,
-            ds => ds.Changes().ForDocument(documentID) ,
-            logger
+            ds => ds.Changes().ForDocument(documentId) ,
+            LoggerFactory.Create(loggerConfig)
         );
+
+        return builder.Add(config);
     }
 }

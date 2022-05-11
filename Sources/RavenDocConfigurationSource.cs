@@ -21,11 +21,11 @@ internal class RavenDocConfigurationSource : RavenConfigurationSource , IConfigu
     }
 
     public IConfigurationProvider Build(IConfigurationBuilder builder) =>
-        new RavenDocProvider(
+        new RavenDocConfigurationProvider(
             _documentStore ,
             _documentId ,
             _reloadOnChange ,
             _observable ,
-            _loggerFactory?.CreateLogger<RavenDocProvider>()
+            _loggerFactory?.CreateLogger<RavenDocConfigurationProvider>()
         );
 }

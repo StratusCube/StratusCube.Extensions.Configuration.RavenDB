@@ -19,10 +19,11 @@ namespace StratusCube.Extensions.Configuration {
 
         public override void Load() {
             using var session = Session;
-            session.Query<object>()
+            Data = session.Advanced.RawQuery<object>("from '@all_docs'")
                 .ToArray()
                 .Select(o =>
-                    o.ToJObject().ToDictionary(_useDbNamePrefix ? _documentStore.Database : null)
+                    o.ToJObject()
+                    .ToDictionary(_useDbNamePrefix ? _documentStore.Database : null)
                 ).ToFlatDictionary();
         }
     }
