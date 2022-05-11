@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Raven.Client.Documents;
 using StratusCube.Extensions.Configuration;
 
@@ -28,7 +29,7 @@ public static class ConfigurationBuilderExtensions {
         Action<ILoggingBuilder>? loggerConfig = default
     ) {
         return builder.Add(
-            new RavenConfigurationSource(
+            new RavenDatabaseConfigurationSource(
                 documentStore , reloadOnChange ,
                 buildSubstription: ds => ds.Changes().ForAllDocuments() ,
                 loggerFactory: LoggerFactory.Create(loggerConfig)
@@ -43,7 +44,7 @@ public static class ConfigurationBuilderExtensions {
     /// <param name="documentStore">The document store to use for RavenDb</param>
     /// <param name="collectionName">The collection to use as configuratins</param>
     /// <param name="reloadOnChange">
-    ///     Should reload when any document in the databse changes 
+    ///     Specifies if the provider should reload when any document in the databse changes 
     /// </param>
     /// <param name="loggerConfig">
     ///     Optional action to build out a logger config for the provider to use
@@ -53,20 +54,56 @@ public static class ConfigurationBuilderExtensions {
         this IConfigurationBuilder builder ,
         IDocumentStore documentStore ,
         string collectionName ,
-        bool reloadOnChange = default ,
-        bool useCollectionPrefix = default,
-        Action<ILoggingBuilder>? loggerConfig = default
+        bool reloadOnChange = false ,
+        bool useCollectionPrefix = false ,
+        Action<ILoggingBuilder>? loggerConfig = null
     ) {
         var logger = LoggerFactory.Create(loggerConfig);
-        var configuration = new RavenConfigurationSource(
+        var configuration = new RavenCollectionConfigurationSource(
             documentStore ,
-            reloadOnChange ,
             collectionName ,
+            reloadOnChange ,
             useCollectionPrefix ,
-            ds => ds.Changes().ForDocumentsInCollection(collectionName),
+            ds => ds.Changes().ForDocumentsInCollection(collectionName) ,
             logger
         );
 
         return builder.Add(configuration);
+    }
+
+    /// <summary>
+    /// Adds a single raven document as configurations
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="documentStore">The document store to use for RavenDb</param>
+    /// <param name="documentId">
+    /// The id of the document to use as a configuration
+    /// <code>MyCollection/A1</code>
+    /// </param>
+    /// <param name="reloadOnChange">
+    ///  Specifies if the provider should reload when the document changes
+    /// </param>
+    /// <param name="loggerConfig"></param>
+    /// <returns>
+    /// Optional action to build out a logger config for the provider to use
+    /// </returns>
+    /// <exception cref="NotImplementedException">
+    /// </exception>
+    public static IConfigurationBuilder AddRavenDocument(
+        this IConfigurationBuilder builder ,
+        IDocumentStore documentStore ,
+        string documentId ,
+        bool reloadOnChange = default ,
+        Action<ILoggingBuilder>? loggerConfig = default
+    ) {
+        var config = new RavenDocConfigurationSource(
+            documentStore ,
+            documentId ,
+            reloadOnChange ,
+            ds => ds.Changes().ForDocument(documentId) ,
+            LoggerFactory.Create(loggerConfig)
+        );
+
+        return builder.Add(config);
     }
 }
